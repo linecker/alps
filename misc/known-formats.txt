@@ -1,0 +1,1 @@
+(?P<date>\w\w\w\s*\w* \w\w:\w\w:\w\w) (?P<host>\S*)

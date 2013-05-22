@@ -207,7 +207,7 @@ func for_each_line(filename string, function func([]byte)) {
 }
 
 func main() {
-    for_each_line("known-formats.txt", prepare_known_formats)
-    for_each_line("known-fields.txt", prepare_known_fields)
-    for_each_line("syslog-sample.txt", process_line)
+    for_each_line("../misc/known-formats.txt", prepare_known_formats)
+    for_each_line("../misc/known-fields.txt", prepare_known_fields)
+    for_each_line("../misc/syslog-sample-01.txt", process_line)
 }

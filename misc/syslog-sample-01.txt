@@ -1,0 +1,307 @@
+# Sample from http://www.rangat.org/rthille/Computer/CrashReporter/system.log
+Dec 14 17:46:04 localhost syslogd: restart
+Dec 14 17:46:04 localhost mach_kernel: standard timeslicing quantum is 10000 us
+Dec 14 17:46:04 localhost mach_kernel: vm_page_bootstrap: 76531 free pages
+Dec 14 17:46:05 localhost mach_kernel: mig_table_max_displ = 64
+Dec 14 17:46:05 localhost mach_kernel: [31mC[32mO[33mL[34mO[35mR[0m video console at 0xb6008000 (1024x768x8)
+Dec 14 17:46:05 localhost mach_kernel: IOKit Component Version 6.0:
+Dec 14 17:46:05 localhost mach_kernel: Sat Jul 27 13:13:37 PDT 2002; root(rcbuilder):RELEASE_PPC/iokit/RELEASE
+Dec 14 17:46:05 localhost mach_kernel: _cppInit done
+Dec 14 17:46:05 localhost mach_kernel: IODeviceTreeSupport done
+Dec 14 17:46:05 localhost mach_kernel: Recording startup extensions.
+Dec 14 17:46:05 localhost mach_kernel: Copyright (c) 1982, 1986, 1989, 1991, 1993
+Dec 14 17:46:06 localhost mach_kernel: 	The Regents of the University of California.  All rights reserved.
+Dec 14 17:46:06 localhost mach_kernel: 
+Dec 14 17:46:06 localhost mach_kernel: using 819 buffer headers and 819 cluster IO buffer headers
+Dec 14 17:46:06 localhost mach_kernel: USBF:	19.719	[0x1d8fc00] USB Generic Hub @ 1 (0x19)
+Dec 14 17:46:07 localhost mach_kernel: USBF:	19.719	[0x1d8f200] USB Generic Hub @ 1 (0x18)
+Dec 14 17:46:07 localhost mach_kernel: devfs enabled
+Dec 14 17:46:07 localhost mach_kernel: IOKitBSDInit
+Dec 14 17:46:07 localhost mach_kernel: From path: "/pci@f2000000/mac-io@17/ata-4@1f000/@0:9,\mach_kernel", Waiting on <dict ID="0"><key>IOPathMatch</key><string ID="1">IODeviceTree:/pci@f2000000/mac-io@17/ata-4@1f000/@0:9</string></dict>
+Dec 14 17:46:07 localhost mach_kernel: Local FireWire GUID = 0x3065ff:0xfe7903a2
+Dec 14 17:46:07 localhost mach_kernel: ADB present:8c
+Dec 14 17:46:07 localhost mach_kernel: Got boot device = IOService:/Core99PE/pci@f2000000/AppleMacRiscPCI/mac-io@17/KeyLargo/ata-4@1f000/KeyLargoATA/ATADeviceNub@0/IOATABlockStorageDriver/IOATABlockStorageDevice/IOBlockStorageDriver/IBM-DJSA-220 Media/IOApplePartitionScheme/untitled@9
+Dec 14 17:46:08 localhost mach_kernel: BSD root: disk0s9, major 14, minor 9
+Dec 14 17:46:08 localhost mach_kernel: devfs on /dev
+Dec 14 17:46:08 localhost mach_kernel: Jettisoning kernel linker.
+Dec 14 17:46:08 localhost mach_kernel: Resetting IOCatalogue.
+Dec 14 17:46:08 localhost mach_kernel: Number of Descriptors: 256. Total Size: 4096 
+Dec 14 17:46:09 localhost mach_kernel: Size of IODBDMADescriptor: 16. 
+Dec 14 17:46:10 localhost mach_kernel: Number of Descriptors: 256. Total Size: 4096 
+Dec 14 17:46:10 localhost mach_kernel: Size of IODBDMADescriptor: 16. 
+Dec 14 17:46:10 localhost mach_kernel: AppleSCCModem(1ec9080): setPowerState is called -- powerStateOrdinal = 0
+Dec 14 17:46:10 localhost mach_kernel: IOPCCard info:   Mac OS X PCMCIA Card Services 3.1.22
+Dec 14 17:46:10 localhost mach_kernel: IOPCCard info:     options:  [pci] [cardbus] [pnp]
+Dec 14 17:46:10 localhost mach_kernel: IOPCCard info:   Intel PCIC probe: 
+Dec 14 17:46:10 localhost mach_kernel: IOPCCard info:     TI 1211 rev 00 PCI-to-CardBus phys mem 0xa0000000 virt mem 0x1038d000
+Dec 14 17:46:10 localhost mach_kernel: IOPCCard info:       host opts [0]: [pci only] [pci irq 255] [lat 16/32] [bus 1/1]
+Dec 14 17:46:11 localhost mach_kernel: IOPCCard info:       PCI card interrupts, PCI status changes
+Dec 14 17:46:11 localhost mach_kernel: ATIRage128: using AGP
+Dec 14 17:46:11 localhost mach_kernel: AirPortDriver: Ethernet address 00:30:65:11:73:1a
+Dec 14 17:46:11 localhost mach_kernel: UniNEnet: Ethernet address 00:30:65:79:03:a2
+Dec 14 17:46:04 localhost ConsoleMessage: Starting Window Server
+Dec 14 17:46:11 localhost mach_kernel: IP packet filtering initialized, divert enabled, rule-based forwarding enabled, default to accept, logging disabled
+Dec 14 17:46:11 localhost mach_kernel: IP firewall loaded
+Dec 14 17:46:04 localhost SystemStarter: Starting Window Server 
+Dec 14 17:46:04 localhost mDNSResponder[195]: Daemon start: mDNS_Init failed -1
+Dec 14 17:46:04 localhost mach_init[2]: Server 0 in bootstrap c03 uid 0: "/usr/sbin/mDNSResponder": exited with non-zero status 255 [pid 195]
+Dec 14 17:46:05 localhost ConsoleMessage: Loading IP Firewall extension
+Dec 14 17:46:05 localhost SystemStarter: Loading IP Firewall extension 
+Dec 14 17:46:07 localhost ConsoleMessage: Starting NetInfo
+Dec 14 17:46:07 localhost SystemStarter: Starting NetInfo 
+Dec 14 17:46:08 localhost /sbin/autodiskmount[155]: disk0s9    hfs      yes   yes   DarkStar         /                
+Dec 14 17:46:08 localhost /sbin/autodiskmount[155]: disk1s1s9  hfs      no    no    Mac OS X Install Disc 1 [not mounted]    
+Dec 14 17:46:10 localhost ConsoleMessage: Starting Directory Services
+Dec 14 17:46:10 localhost ConsoleMessage: Updating system settings
+Dec 14 17:46:10 localhost SystemStarter: Starting Directory Services 
+Dec 14 17:46:10 localhost SystemStarter: Updating system settings 
+Dec 14 17:46:10 localhost /sbin/autodiskmount[239]: disk0s9    hfs      yes   yes   DarkStar         /                
+Dec 14 17:46:10 localhost /sbin/autodiskmount[239]: disk1s1s9  hfs      no    no    Mac OS X Install Disc 1 [not mounted]    
+Dec 14 17:46:11 localhost /sbin/autodiskmount[239]: disk1s1s9  hfs      no    no    Mac OS X Install Disc 1 [not mounted]    
+Dec 14 17:46:12 localhost lookupd[260]: lookupd (version 272) starting - Sat Dec 14 17:46:12 2002
+Dec 14 17:46:14 localhost mach_kernel: ATY,RageM3pA: vram [b6000000:00800000]
+Dec 14 17:46:13 localhost crashdump: Crash report written to: /Library/Logs/CrashReporter/UpdateSettingsTool.crash.log
+Dec 14 17:46:16 localhost mach_kernel: ATY,RageM3pB: vram [b4000000:00800000]
+Dec 14 17:46:16 localhost WindowServer[253]: Display 0x4270280: MappedDisplay Unit 0; Vendor 0x610 Model 0x9c0a S/N 0; online built-in (0,0)[1024 x 768], base addr 0xb000f000
+Dec 14 17:46:16 localhost WindowServer[253]: Display 0x3f003d: MappedDisplay Unit 1; Vendor 0xffffffff Model 0xffffffff S/N -1; offline (2048,0)[1 x 1], base addr 0xb0810000
+Dec 14 17:46:16 localhost WindowServer[253]: Display 0x41dc9d00: VirtualDisplay Unit 0; Vendor 0x756e6b6e Model 0x76697274 S/N 0; offline built-in (2049,0)[1 x 1], base addr 0xb000c000
+Dec 14 17:46:16 localhost SystemStarter: (CSYNC DEBUG) : GetProfileBySpaceFromShmem returned NULL for '0000' : Calling Dispatcher.
+Dec 14 17:46:17 localhost SystemStarter: (CSYNC DEBUG) : GetProfileBySpaceFromShmem returned NULL for 'RRRR' : Calling Dispatcher.
+Dec 14 17:46:19 localhost WindowServer[253]: CGXDisableUpdate: Updates disabled by connection 0x3f03 for over 1.000000 seconds
+Dec 14 17:46:19 localhost SystemStarter: update settings (242) did not complete successfully. 
+Dec 14 17:46:19 localhost ConsoleMessage: Starting Core Services
+Dec 14 17:46:20 localhost ConsoleMessage: Starting internet services
+Dec 14 17:46:20 localhost ConsoleMessage: Starting printing services
+Dec 14 17:46:20 localhost ConsoleMessage: Starting timed execution services
+Dec 14 17:46:20 localhost ConsoleMessage: Creating Java Shared Archive
+Dec 14 17:46:20 localhost ConsoleMessage: Starting network file system
+Dec 14 17:46:20 localhost SystemStarter: Unable to load localization strings for /System/Library/StartupItems/JavaCleanup 
+Dec 14 17:46:24 localhost xinetd[317]: {init_services} no services. Exiting...
+Dec 14 17:46:24 localhost automount[327]: automount version 26
+Dec 14 17:46:25 localhost automount[327]: could not open session with configd 
+Dec 14 17:46:25 localhost automount[327]: error = unknown error code 
+Dec 14 17:47:07 localhost /sbin/autodiskmount[239]: disk1s1s9  hfs      no    no    Mac OS X Install Disc 1 [not mounted]    
+Dec 14 17:47:08 localhost /sbin/autodiskmount[239]: disk1s1s9  hfs      no    no    Mac OS X Install Disc 1 /Volumes/Mac OS X Install Disc 1 
+Dec 14 22:34:42 localhost /sbin/autodiskmount[239]: disk1s1s9  hfs      no    no    Mac OS X Install Disc 2 [not mounted]    
+Dec 14 22:34:43 localhost /sbin/autodiskmount[239]: disk1s1s9  hfs      no    no    Mac OS X Install Disc 2 /Volumes/Mac OS X Install Disc 2 
+Dec 14 22:40:03 localhost mach_kernel: hfs_bwrite: called with lock bit set
+Dec 14 22:42:54 localhost mach_kernel: hfs_bwrite: called with lock bit set
+Dec 14 22:49:19 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s1', flags = $00000000): already busy 
+Dec 14 22:49:19 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s2', flags = $00000000): already busy 
+Dec 14 22:49:19 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s3', flags = $00000000): already busy 
+Dec 14 22:49:19 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s5', flags = $00000000): already busy 
+Dec 14 22:49:19 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s6', flags = $00000000): already busy 
+Dec 14 22:49:19 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s7', flags = $00000000): already busy 
+Dec 14 22:49:19 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1', flags = $00000000): already busy 
+Dec 14 22:49:19 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s9', flags = $00000000): already busy 
+Dec 14 22:49:19 localhost WindowServer[253]: loginwindow connection closed; closing server.
+Dec 14 22:49:19 localhost loginwindow[325]: MIG: server died : CGSExtractEventRecordsFromMessage
+Dec 14 22:49:23 localhost WindowServer[381]: Display 0x4270280: MappedDisplay Unit 0; Vendor 0x610 Model 0x9c0a S/N 0; online built-in (0,0)[1024 x 768], base addr 0xb000f000
+Dec 14 22:49:23 localhost WindowServer[381]: Display 0x3f003d: MappedDisplay Unit 1; Vendor 0xffffffff Model 0xffffffff S/N -1; offline (2048,0)[1 x 1], base addr 0xb0810000
+Dec 14 22:49:23 localhost WindowServer[381]: Display 0x41dc9d00: VirtualDisplay Unit 0; Vendor 0x756e6b6e Model 0x76697274 S/N 0; offline built-in (2049,0)[1 x 1], base addr 0xb000c000
+Dec 14 22:49:23 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s1', flags = $00000000): already busy 
+Dec 14 22:49:23 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s2', flags = $00000000): already busy 
+Dec 14 22:49:23 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s3', flags = $00000000): already busy 
+Dec 14 22:49:23 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s5', flags = $00000000): already busy 
+Dec 14 22:49:23 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s6', flags = $00000000): already busy 
+Dec 14 22:49:23 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s7', flags = $00000000): already busy 
+Dec 14 22:49:23 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1', flags = $00000000): already busy 
+Dec 14 22:49:23 localhost /sbin/autodiskmount[239]: DiskArbUnmountRequest_async_rpc(diskIdentifier = 'disk1s1s9', flags = $00000000): already busy 
+Dec 14 22:49:30 localhost crashdump: Crash report written to: /Library/Logs/CrashReporter/SecurityAgent.crash.log
+Dec 14 22:49:31 localhost loginwindow[382]: Login authorization failed (-60005)! 
+Dec 14 22:49:31 localhost loginwindow[382]: AuthorizationRef doesn't have a username (<LoginAuthRefMgr: 0x2f8fe0>). 
+Dec 14 22:49:31 localhost loginwindow[382]: exiting to console 
+Dec 14 22:49:31 localhost WindowServer[381]: loginwindow connection closed; closing server.
+Dec 14 22:50:08 localhost su: pam_authenticate: Authentication failure
+Dec 14 22:50:22 localhost sudo:  rthille : TTY=console ; PWD=/Users/rthille ; USER=root ; COMMAND=/bin/bash
+Dec 14 23:02:16 localhost reboot: rebooted by rthille
+Dec 14 23:02:16 localhost syslogd: exiting on signal 15
+Dec 14 23:03:29 localhost syslogd: restart
+Dec 14 23:03:29 localhost mach_kernel: standard timeslicing quantum is 10000 us
+Dec 14 23:03:29 localhost mach_kernel: vm_page_bootstrap: 76531 free pages
+Dec 14 23:03:29 localhost mach_kernel: mig_table_max_displ = 64
+Dec 14 23:03:29 localhost mach_kernel: [31mC[32mO[33mL[34mO[35mR[0m video console at 0xb6008000 (1024x768x8)
+Dec 14 23:03:29 localhost mach_kernel: IOKit Component Version 6.0:
+Dec 14 23:03:29 localhost mach_kernel: Sat Jul 27 13:13:37 PDT 2002; root(rcbuilder):RELEASE_PPC/iokit/RELEASE
+Dec 14 23:03:29 localhost mach_kernel: _cppInit done
+Dec 14 23:03:29 localhost mach_kernel: IODeviceTreeSupport done
+Dec 14 23:03:29 localhost mach_kernel: Recording startup extensions.
+Dec 14 23:03:29 localhost mach_kernel: Copyright (c) 1982, 1986, 1989, 1991, 1993
+Dec 14 23:03:29 localhost mach_kernel: 	The Regents of the University of California.  All rights reserved.
+Dec 14 23:03:29 localhost mach_kernel: 
+Dec 14 23:03:29 localhost mach_kernel: using 819 buffer headers and 819 cluster IO buffer headers
+Dec 14 23:03:29 localhost mach_kernel: USBF:	19.850	[0x1d8fc00] USB Generic Hub @ 1 (0x19)
+Dec 14 23:03:29 localhost mach_kernel: USBF:	19.851	[0x1d8f200] USB Generic Hub @ 1 (0x18)
+Dec 14 23:03:29 localhost mach_kernel: devfs enabled
+Dec 14 23:03:29 localhost mach_kernel: IOKitBSDInit
+Dec 14 23:03:29 localhost mach_kernel: From path: "/pci@f2000000/mac-io@17/ata-4@1f000/@0:9,\mach_kernel", Waiting on <dict ID="0"><key>IOPathMatch</key><string ID="1">IODeviceTree:/pci@f2000000/mac-io@17/ata-4@1f000/@0:9</string></dict>
+Dec 14 23:03:29 localhost mach_kernel: Local FireWire GUID = 0x3065ff:0xfe7903a2
+Dec 14 23:03:29 localhost mach_kernel: ADB present:8c
+Dec 14 23:03:29 localhost mach_kernel: Got boot device = IOService:/Core99PE/pci@f2000000/AppleMacRiscPCI/mac-io@17/KeyLargo/ata-4@1f000/KeyLargoATA/ATADeviceNub@0/IOATABlockStorageDriver/IOATABlockStorageDevice/IOBlockStorageDriver/IBM-DJSA-220 Media/IOApplePartitionScheme/untitled@9
+Dec 14 23:03:29 localhost mach_kernel: BSD root: disk0s9, major 14, minor 9
+Dec 14 23:03:29 localhost mach_kernel: devfs on /dev
+Dec 14 23:03:29 localhost mach_kernel: Jettisoning kernel linker.
+Dec 14 23:03:29 localhost mach_kernel: Resetting IOCatalogue.
+Dec 14 23:03:29 localhost mach_kernel: Number of Descriptors: 256. Total Size: 4096 
+Dec 14 23:03:29 localhost mach_kernel: Size of IODBDMADescriptor: 16. 
+Dec 14 23:03:29 localhost mach_kernel: IOPCCard info:   Mac OS X PCMCIA Card Services 3.1.22
+Dec 14 23:03:29 localhost mach_kernel: IOPCCard info:     options:  [pci] [cardbus] [pnp]
+Dec 14 23:03:29 localhost mach_kernel: IOPCCard info:   Intel PCIC probe: 
+Dec 14 23:03:29 localhost mach_kernel: IOPCCard info:     TI 1211 rev 00 PCI-to-CardBus phys mem 0xa0000000 virt mem 0x103d5000
+Dec 14 23:03:29 localhost mach_kernel: IOPCCard info:       host opts [0]: [pci only] [pci irq 255] [lat 16/32] [bus 1/1]
+Dec 14 23:03:29 localhost mach_kernel: IOPCCard info:       PCI card interrupts, PCI status changes
+Dec 14 23:03:29 localhost mach_kernel: ATIRage128: using AGP
+Dec 14 23:03:29 localhost mach_kernel: Number of Descriptors: 256. Total Size: 4096 
+Dec 14 23:03:29 localhost mach_kernel: Size of IODBDMADescriptor: 16. 
+Dec 14 23:03:29 localhost mach_kernel: AppleSCCModem(1d7cf00): setPowerState is called -- powerStateOrdinal = 0
+Dec 14 23:03:29 localhost mach_kernel: AirPortDriver: Ethernet address 00:30:65:11:73:1a
+Dec 14 23:03:29 localhost mach_kernel: UniNEnet: Ethernet address 00:30:65:79:03:a2
+Dec 14 23:03:29 localhost ConsoleMessage: Starting NetInfo
+Dec 14 23:03:29 localhost SystemStarter: Starting Apple Multicast DNS Responder 
+Dec 14 23:03:29 localhost mDNSResponder[221]: Daemon start: mDNS_Init failed -1
+Dec 14 23:03:29 localhost mach_init[2]: Server 0 in bootstrap c03 uid 0: "/usr/sbin/mDNSResponder": exited with non-zero status 255 [pid 221]
+Dec 14 23:03:29 localhost SystemStarter: Starting NetInfo 
+Dec 14 23:03:30 localhost /sbin/autodiskmount[155]: disk0s9    hfs      yes   yes   DarkStar         /                
+Dec 14 23:03:31 localhost /sbin/autodiskmount[238]: disk0s9    hfs      yes   yes   DarkStar         /                
+Dec 14 23:03:31 localhost ConsoleMessage: Loading IP Firewall extension
+Dec 14 23:03:32 localhost mach_kernel: ATY,RageM3pA: vram [b6000000:00800000]
+Dec 14 23:03:33 localhost mach_kernel: ATY,RageM3pB: vram [b4000000:00800000]
+Dec 14 23:03:33 localhost WindowServer[232]: Display 0x4270280: MappedDisplay Unit 0; Vendor 0x610 Model 0x9c0a S/N 0; online built-in (0,0)[1024 x 768], base addr 0xb000f000
+Dec 14 23:03:33 localhost WindowServer[232]: Display 0x3f003d: MappedDisplay Unit 1; Vendor 0xffffffff Model 0xffffffff S/N -1; offline (2048,0)[1 x 1], base addr 0xb0810000
+Dec 14 23:03:33 localhost WindowServer[232]: Display 0x41dc9d00: VirtualDisplay Unit 0; Vendor 0x756e6b6e Model 0x76697274 S/N 0; offline built-in (2049,0)[1 x 1], base addr 0xb000c000
+Dec 14 23:03:33 localhost SystemStarter: (CSYNC DEBUG) : GetProfileBySpaceFromShmem returned NULL for '0000' : Calling Dispatcher.
+Dec 14 23:03:33 localhost SystemStarter: (CSYNC DEBUG) : GetProfileBySpaceFromShmem returned NULL for 'RRRR' : Calling Dispatcher.
+Dec 14 23:03:34 localhost ConsoleMessage: Updating system settings
+Dec 14 23:03:34 localhost ConsoleMessage: Starting Directory Services
+Dec 14 23:03:34 localhost lookupd[252]: lookupd (version 272) starting - Sat Dec 14 23:03:34 2002
+Dec 14 23:03:34 localhost ConsoleMessage: Starting Core Services
+Dec 14 23:03:35 localhost ConsoleMessage: Starting network file system
+Dec 14 23:03:35 localhost ConsoleMessage: Starting internet services
+Dec 14 23:03:35 localhost ConsoleMessage: Starting timed execution services
+Dec 14 23:03:35 localhost ConsoleMessage: Starting printing services
+Dec 14 23:03:36 localhost automount[294]: automount version 26
+Dec 14 23:03:36 localhost automount[294]: could not open session with configd 
+Dec 14 23:03:36 localhost automount[294]: error = unknown error code 
+Dec 14 23:03:37 localhost xinetd[305]: {init_services} no services. Exiting...
+Dec 14 23:03:37 localhost crashdump: Crash report written to: /Library/Logs/CrashReporter/UpdateSettingsTool.crash.log
+Dec 14 23:03:37 localhost SystemStarter: update settings (245) did not complete successfully. 
+Dec 14 23:03:38 localhost mach_kernel: IP packet filtering initialized, divert enabled, rule-based forwarding enabled, default to accept, logging disabled
+Dec 14 23:03:38 localhost mach_kernel: IP firewall loaded
+Dec 14 23:03:47 localhost crashdump: Crash report written to: /Library/Logs/CrashReporter/SecurityAgent.crash.log
+Dec 14 23:03:48 localhost loginwindow[308]: Login authorization failed (-60005)! 
+Dec 14 23:03:48 localhost loginwindow[308]: AuthorizationRef doesn't have a username (<LoginAuthRefMgr: 0x2fa990>). 
+Dec 14 23:03:48 localhost loginwindow[308]: exiting to console 
+Dec 14 23:03:48 localhost WindowServer[232]: loginwindow connection closed; closing server.
+Dec 14 23:04:15 localhost sudo:  rthille : TTY=console ; PWD=/Users/rthille ; USER=root ; COMMAND=/bin/sh
+Dec 14 23:05:39 localhost WindowServer[350]: Display 0x4270280: MappedDisplay Unit 0; Vendor 0x610 Model 0x9c0a S/N 0; online built-in (0,0)[1024 x 768], base addr 0xb000f000
+Dec 14 23:05:39 localhost WindowServer[350]: Display 0x3f003d: MappedDisplay Unit 1; Vendor 0xffffffff Model 0xffffffff S/N -1; offline (2048,0)[1 x 1], base addr 0xb0810000
+Dec 14 23:05:39 localhost WindowServer[350]: Display 0x41dc9d00: VirtualDisplay Unit 0; Vendor 0x756e6b6e Model 0x76697274 S/N 0; offline built-in (2049,0)[1 x 1], base addr 0xb000c000
+Dec 14 23:05:43 localhost crashdump: Crash report written to: /Library/Logs/CrashReporter/SecurityAgent.crash.log
+Dec 14 23:05:44 localhost loginwindow[351]: Login authorization failed (-60005)! 
+Dec 14 23:05:44 localhost loginwindow[351]: AuthorizationRef doesn't have a username (<LoginAuthRefMgr: 0x2f87e0>). 
+Dec 14 23:05:44 localhost loginwindow[351]: exiting to console 
+Dec 14 23:05:44 localhost WindowServer[350]: loginwindow connection closed; closing server.
+Dec 14 23:05:57 localhost sudo:  rthille : TTY=console ; PWD=/Users/rthille ; USER=root ; COMMAND=/bin/sh
+Dec 14 23:08:21 localhost mach_kernel: USBF:	337.633	[0x21f0c00] USB Generic Hub @ 2 (0x1100000)
+Dec 14 23:08:23 localhost mach_kernel: USBF:	340.183	AppleUSBKeyboard[0x2162c00]::start USB Generic Keyboard @ 4 (0x1110000)
+Dec 14 23:08:24 localhost mach_kernel: USBF:	340.576	IOUSBHIDDriver[0x20a3600]::start -  USB HID Device @ 4 (0x1110000)
+Dec 14 23:08:48 localhost WindowServer[391]: Display 0x4270280: MappedDisplay Unit 0; Vendor 0x610 Model 0x9c0a S/N 0; online built-in (0,0)[1024 x 768], base addr 0xb000f000
+Dec 14 23:08:48 localhost WindowServer[391]: Display 0x3f003d: MappedDisplay Unit 1; Vendor 0xffffffff Model 0xffffffff S/N -1; offline (2048,0)[1 x 1], base addr 0xb0810000
+Dec 14 23:08:48 localhost WindowServer[391]: Display 0x41dc9d00: VirtualDisplay Unit 0; Vendor 0x756e6b6e Model 0x76697274 S/N 0; offline built-in (2049,0)[1 x 1], base addr 0xb000c000
+Dec 14 23:08:52 localhost crashdump: Crash report written to: /Library/Logs/CrashReporter/SecurityAgent.crash.log
+Dec 14 23:08:52 localhost loginwindow[392]: Login authorization failed (-60005)! 
+Dec 14 23:08:53 localhost loginwindow[392]: AuthorizationRef doesn't have a username (<LoginAuthRefMgr: 0x2f6ca0>). 
+Dec 14 23:08:53 localhost loginwindow[392]: exiting to console 
+Dec 14 23:08:53 localhost WindowServer[391]: loginwindow connection closed; closing server.
+Dec 14 23:09:12 localhost sudo:  rthille : TTY=console ; PWD=/Users/rthille ; USER=root ; COMMAND=/bin/bash
+Dec 14 23:17:01 localhost sudo:  rthille : TTY=console ; PWD=/Users/rthille ; USER=root ; COMMAND=/sbin/reboot
+Dec 14 23:17:01 localhost reboot: rebooted by rthille
+Dec 14 23:17:01 localhost syslogd: exiting on signal 15
+Dec 14 23:18:02 localhost syslogd: restart
+Dec 14 23:18:02 localhost mach_kernel: standard timeslicing quantum is 10000 us
+Dec 14 23:18:02 localhost mach_kernel: vm_page_bootstrap: 76530 free pages
+Dec 14 23:18:02 localhost mach_kernel: mig_table_max_displ = 64
+Dec 14 23:18:02 localhost mach_kernel: [31mC[32mO[33mL[34mO[35mR[0m video console at 0xb6008000 (1024x768x8)
+Dec 14 23:18:02 localhost mach_kernel: IOKit Component Version 6.0:
+Dec 14 23:18:02 localhost mach_kernel: Sat Jul 27 13:13:37 PDT 2002; root(rcbuilder):RELEASE_PPC/iokit/RELEASE
+Dec 14 23:18:02 localhost mach_kernel: _cppInit done
+Dec 14 23:18:02 localhost mach_kernel: IODeviceTreeSupport done
+Dec 14 23:18:02 localhost mach_kernel: Recording startup extensions.
+Dec 14 23:18:02 localhost mach_kernel: Copyright (c) 1982, 1986, 1989, 1991, 1993
+Dec 14 23:18:02 localhost mach_kernel: 	The Regents of the University of California.  All rights reserved.
+Dec 14 23:18:02 localhost mach_kernel: 
+Dec 14 23:18:02 localhost mach_kernel: using 819 buffer headers and 819 cluster IO buffer headers
+Dec 14 23:18:02 localhost mach_kernel: USBF:	25. 10	[0x1d92600] USB Generic Hub @ 1 (0x19)
+Dec 14 23:18:02 localhost mach_kernel: USBF:	25. 10	[0x1d92c00] USB Generic Hub @ 1 (0x18)
+Dec 14 23:18:02 localhost mach_kernel: USBF:	25.828	[0x1d92000] USB Generic Hub @ 2 (0x1100000)
+Dec 14 23:18:02 localhost mach_kernel: devfs enabled
+Dec 14 23:18:02 localhost mach_kernel: IOKitBSDInit
+Dec 14 23:18:02 localhost mach_kernel: From path: "/pci@f2000000/mac-io@17/ata-4@1f000/@0:9,\mach_kernel", Waiting on <dict ID="0"><key>IOPathMatch</key><string ID="1">IODeviceTree:/pci@f2000000/mac-io@17/ata-4@1f000/@0:9</string></dict>
+Dec 14 23:18:02 localhost mach_kernel: Local FireWire GUID = 0x3065ff:0xfe7903a2
+Dec 14 23:18:02 localhost mach_kernel: ADB present:8c
+Dec 14 23:18:02 localhost mach_kernel: Got boot device = IOService:/Core99PE/pci@f2000000/AppleMacRiscPCI/mac-io@17/KeyLargo/ata-4@1f000/KeyLargoATA/ATADeviceNub@0/IOATABlockStorageDriver/IOATABlockStorageDevice/IOBlockStorageDriver/IBM-DJSA-220 Media/IOApplePartitionScheme/untitled@9
+Dec 14 23:18:02 localhost mach_kernel: BSD root: disk0s9, major 14, minor 9
+Dec 14 23:18:02 localhost mach_kernel: devfs on /dev
+Dec 14 23:18:02 localhost mach_kernel: USBF:	30.540	AppleUSBKeyboard[0x1e5f800]::start USB Generic Keyboard @ 4 (0x1110000)
+Dec 14 23:18:02 localhost mach_kernel: Jettisoning kernel linker.
+Dec 14 23:18:02 localhost mach_kernel: Resetting IOCatalogue.
+Dec 14 23:18:02 localhost mach_kernel: Number of Descriptors: 256. Total Size: 4096 
+Dec 14 23:18:02 localhost mach_kernel: Size of IODBDMADescriptor: 16. 
+Dec 14 23:18:02 localhost mach_kernel: USBF:	41.629	IOUSBHIDDriver[0x1e0fb00]::start -  USB HID Device @ 4 (0x1110000)
+Dec 14 23:18:02 localhost mach_kernel: IOPCCard info:   Mac OS X PCMCIA Card Services 3.1.22
+Dec 14 23:18:02 localhost mach_kernel: IOPCCard info:     options:  [pci] [cardbus] [pnp]
+Dec 14 23:18:02 localhost mach_kernel: IOPCCard info:   Intel PCIC probe: 
+Dec 14 23:18:02 localhost mach_kernel: IOPCCard info:     TI 1211 rev 00 PCI-to-CardBus phys mem 0xa0000000 virt mem 0x1032f000
+Dec 14 23:18:02 localhost mach_kernel: IOPCCard info:       host opts [0]: [pci only] [pci irq 255] [lat 16/32] [bus 1/1]
+Dec 14 23:18:02 localhost mach_kernel: IOPCCard info:       PCI card interrupts, PCI status changes
+Dec 14 23:18:02 localhost mach_kernel: ATIRage128: using AGP
+Dec 14 23:18:02 localhost mach_kernel: Number of Descriptors: 256. Total Size: 4096 
+Dec 14 23:18:02 localhost mach_kernel: Size of IODBDMADescriptor: 16. 
+Dec 14 23:18:02 localhost mach_kernel: AppleSCCModem(1dd7100): setPowerState is called -- powerStateOrdinal = 0
+Dec 14 23:18:02 localhost mach_kernel: AirPortDriver: Ethernet address 00:30:65:11:73:1a
+Dec 14 23:18:02 localhost mach_kernel: UniNEnet: Ethernet address 00:30:65:79:03:a2
+Dec 14 23:18:02 localhost ConsoleMessage: Starting Window Server
+Dec 14 23:18:02 localhost ConsoleMessage: Loading Shared IP extension
+Dec 14 23:18:02 localhost SystemStarter: Starting Apple Multicast DNS Responder 
+Dec 14 23:18:02 localhost SystemStarter: Starting Window Server 
+Dec 14 23:18:02 localhost SystemStarter: Loading Shared IP extension 
+Dec 14 23:18:02 localhost mDNSResponder[205]: Daemon start: mDNS_Init failed -1
+Dec 14 23:18:02 localhost mach_init[2]: Server 0 in bootstrap c03 uid 0: "/usr/sbin/mDNSResponder": exited with non-zero status 255 [pid 205]
+Dec 14 23:18:03 localhost ConsoleMessage: Starting NetInfo
+Dec 14 23:18:03 localhost SystemStarter: Starting NetInfo 
+Dec 14 23:18:03 localhost ConsoleMessage: Starting Directory Services
+Dec 14 23:18:03 localhost ConsoleMessage: Updating system settings
+Dec 14 23:18:04 localhost /sbin/autodiskmount[158]: disk0s9    hfs      yes   yes   DarkStar         /                
+Dec 14 23:18:04 localhost /sbin/autodiskmount[242]: disk0s9    hfs      yes   yes   DarkStar         /                
+Dec 14 23:18:05 localhost ConsoleMessage: Loading IP Firewall extension
+Dec 14 23:18:06 localhost mach_kernel: ATY,RageM3pA: vram [b6000000:00800000]
+Dec 14 23:18:06 localhost mach_kernel: ATY,RageM3pB: vram [b4000000:00800000]
+Dec 14 23:18:06 localhost WindowServer[236]: Display 0x4270280: MappedDisplay Unit 0; Vendor 0x610 Model 0x9c0a S/N 0; online built-in (0,0)[1024 x 768], base addr 0xb000f000
+Dec 14 23:18:06 localhost WindowServer[236]: Display 0x400bb81: MappedDisplay Unit 1; Vendor 0x610 Model 0x2ee S/N 0; online (1024,0)[1024 x 768], base addr 0xb0810000
+Dec 14 23:18:06 localhost WindowServer[236]: Display 0x41dc9d00: VirtualDisplay Unit 0; Vendor 0x756e6b6e Model 0x76697274 S/N 0; offline built-in (3072,0)[1 x 1], base addr 0xb000c000
+Dec 14 23:18:06 localhost SystemStarter: (CSYNC DEBUG) : GetProfileBySpaceFromShmem returned NULL for '0000' : Calling Dispatcher.
+Dec 14 23:18:07 localhost SystemStarter: (CSYNC DEBUG) : GetProfileBySpaceFromShmem returned NULL for 'RRRR' : Calling Dispatcher.
+Dec 14 23:18:07 localhost lookupd[249]: lookupd (version 272) starting - Sat Dec 14 23:18:07 2002
+Dec 14 23:18:08 localhost ConsoleMessage: Starting Core Services
+Dec 14 23:18:08 localhost ConsoleMessage: Starting internet services
+Dec 14 23:18:08 localhost ConsoleMessage: Starting network file system
+Dec 14 23:18:08 localhost ConsoleMessage: Starting timed execution services
+Dec 14 23:18:08 localhost ConsoleMessage: Starting printing services
+Dec 14 23:18:09 localhost xinetd[281]: {init_services} no services. Exiting...
+Dec 14 23:18:10 localhost automount[301]: automount version 26
+Dec 14 23:18:10 localhost automount[301]: could not open session with configd 
+Dec 14 23:18:10 localhost automount[301]: error = unknown error code 
+Dec 14 23:18:10 localhost crashdump: Crash report written to: /Library/Logs/CrashReporter/UpdateSettingsTool.crash.log
+Dec 14 23:18:12 localhost mach_kernel: IP packet filtering initialized, divert enabled, rule-based forwarding enabled, default to accept, logging disabled
+Dec 14 23:18:12 localhost mach_kernel: IP firewall loaded
+Dec 14 23:18:18 localhost SystemStarter: update settings (233) did not complete successfully. 
+Dec 14 23:18:21 localhost crashdump: Crash report written to: /Library/Logs/CrashReporter/SecurityAgent.crash.log
+Dec 14 23:18:30 localhost loginwindow[307]: Login authorization failed (-60005)! 
+Dec 14 23:18:30 localhost loginwindow[307]: AuthorizationRef doesn't have a username (<LoginAuthRefMgr: 0x305360>). 
+Dec 14 23:18:30 localhost loginwindow[307]: exiting to console 
+Dec 14 23:18:30 localhost WindowServer[236]: loginwindow connection closed; closing server.
+Dec 14 23:19:05 localhost sudo:  rthille : 3 incorrect password attempts ; TTY=console ; PWD=/Users/rthille ; USER=root ; COMMAND=/bin/bash
+Dec 14 23:19:17 localhost sudo:  rthille : TTY=console ; PWD=/Users/rthille ; USER=root ; COMMAND=/bin/bash
+Dec 14 23:25:49 localhost crashdump: Crash report written to: /Library/Logs/CrashReporter/gdb-powerpc-apple-macos10.crash.log
+Dec 14 23:32:14 localhost /usr/libexec/crashreporterd: crashdump exited with status: 1
+Dec 14 23:32:50 localhost last message repeated 4 times
