@@ -1,5 +1,4 @@
 // Next:
-// - Recursive calls, proper implemenentation
 // - Better output format(?)
 // - Proper offset
 
@@ -44,8 +43,7 @@ func print(chunks []Chunk) {
     fmt.Println()
 }
 
-/*
-func print(chunks []Chunk) {
+func print_table(chunks []Chunk) {
     fmt.Println()
     fmt.Println(" Tag              | Payload                                  | Pos1     | Pos2")
     fmt.Println("------------------|----------------------------------------------------------------")
@@ -65,7 +63,7 @@ func print(chunks []Chunk) {
         }
     }
     fmt.Println()
-}*/
+}
 
 func chop_add(chunks []Chunk, bytes []byte, tag string, pos1 int, pos2 int, offset int) []Chunk {
     if len(bytes) == 0 {
@@ -146,26 +144,6 @@ func process_line(line []byte) {
     }
     print(result)
 }
-/*
-func process_line(line []byte) {
-    c := preprocess(line)
-    chunked := chop(c[0], known_formats[0], 0)
-    var result []Chunk
-    for i := range chunked {
-        if chunked[i].tag == "" {
-            for j := 0; j < len(known_fields); j++ {
-                r := chop(chunked[i], known_fields[j], chunked[i].pos1)
-                for k := range r {
-                    result = append(result, r[k])
-                }
-            }
-            result = append(result, chunked[i])
-        } else {
-            result = append(result, chunked[i])
-        }
-    }
-    print(result)
-}*/
 
 func prepare_regexps(line []byte, list *[]regexp.Regexp) {
     

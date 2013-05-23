@@ -3,7 +3,7 @@ Dec 14 17:46:04 localhost syslogd: restart
 Dec 14 17:46:04 localhost mach_kernel: standard timeslicing quantum is 10000 us
 Dec 14 17:46:04 localhost mach_kernel: vm_page_bootstrap: 76531 free pages
 Dec 14 17:46:05 localhost mach_kernel: mig_table_max_displ = 64
-Dec 14 17:46:05 localhost mach_kernel: [31mC[32mO[33mL[34mO[35mR[0m video console at 0xb6008000 (1024x768x8)
+Dec 14 17:46:05 localhost mach_kernel: color video console at 0xb6008000 (1024x768x8)
 Dec 14 17:46:05 localhost mach_kernel: IOKit Component Version 6.0:
 Dec 14 17:46:05 localhost mach_kernel: Sat Jul 27 13:13:37 PDT 2002; root(rcbuilder):RELEASE_PPC/iokit/RELEASE
 Dec 14 17:46:05 localhost mach_kernel: _cppInit done
