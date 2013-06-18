@@ -163,6 +163,19 @@ func prepare_known_fields(line []byte) {
     prepare_regexps(line, &known_fields)
 }
 
+// Remove comments, which are indicated by "<<<<<<", from a line.
+func uncomment(line string) string {
+    pos := strings.Index(string(line), " <<<<<<")
+    if pos == -1 {
+        return line
+    }
+    trimmed := line[0:pos]
+
+    fmt.Println("input  =", line)
+    fmt.Println("output =", trimmed)
+    return trimmed
+}
+
 // Call function for each line in a file.
 func for_each_line(filename string, function func([]byte)) {
     f, err := os.Open(filename)
@@ -175,6 +188,7 @@ func for_each_line(filename string, function func([]byte)) {
         line, err := r.ReadBytes('\n')
         if err == nil {
             clean := strings.Trim(string(line), "\r\n")
+            clean = uncomment(clean)
             function([]byte(clean))
         } else if err == io.EOF {
             break

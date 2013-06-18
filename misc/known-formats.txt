@@ -1,1 +1,2 @@
-(?P<date>\w\w\w\s*\w* \w\w:\w\w:\w\w) (?P<host>\S*)
+(?P<date>\w\w\w\s*\w* \w\w:\w\w:\w\w) (?P<host>\S*) <<<<<< Syslog
+[(?P<date>\w\w\w \w* \w\w:\w\w:\w\w)] (?P<host>\S*) <<<<<< TODO: Asterisk, e.g. [Mar 13 07:34:44] VERBOSE[2724] logger.c: == Manager registered action GetConfig
