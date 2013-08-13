@@ -1,2 +1,4 @@
-(?P<date>\w\w\w\s*\w* \w\w:\w\w:\w\w) (?P<host>\S*) <<<<<< Syslog
-[(?P<date>\w\w\w \w* \w\w:\w\w:\w\w)] (?P<host>\S*) <<<<<< TODO: Asterisk, e.g. [Mar 13 07:34:44] VERBOSE[2724] logger.c: == Manager registered action GetConfig
+syslog: (?P<date>\w\w\w\s*\w* \w\w:\w\w:\w\w) (?P<host>\S*)
+asterisk: [(?P<date>\w\w\w \w* \w\w:\w\w:\w\w)] (?P<host>\S*) <<<<<< TODO: Asterisk, e.g. [Mar 13 07:34:44] VERBOSE[2724] logger.c: == Manager registered action GetConfig
+blabla: (test)
+blalogfileformat: (?P<date>\w\w\w\s*\w* \w\w:\w\w:\w\w) (?P<host>\S*)

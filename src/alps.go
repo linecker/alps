@@ -4,13 +4,13 @@
 
 package main
 
-import "bufio"
+import "bytes"
+import "flag"
 import "fmt"
-import "io"
 import "os"
 import "regexp"
-import "strings"
 import "strconv"
+import "strings"
 
 type Chunk struct {
     pos1 int
@@ -19,7 +19,20 @@ type Chunk struct {
     tag string
 }
 
-var known_formats []regexp.Regexp
+type Format struct {
+    name string
+    exp regexp.Regexp
+}
+
+func NewFormat(n string, e regexp.Regexp) *Format {
+    return &Format {
+        name: n,
+        exp: e,
+    }
+}
+
+var known_formats []Format
+// replaces: var known_formats []regexp.Regexp
 var known_fields []regexp.Regexp
 
 func print(chunks []Chunk) {
@@ -134,7 +147,7 @@ func rec(chunk Chunk) []Chunk{
 
 func process_line(line []byte) {
     c := preprocess(line)
-    chunked := chop(c[0], known_formats[0], 0)
+    chunked := chop(c[0], known_formats[0].exp, 0)
     var result []Chunk
     for i := range chunked {
         r := rec(chunked[i])
@@ -155,51 +168,87 @@ func prepare_regexps(line []byte, list *[]regexp.Regexp) {
     *list = append(*(list), *r)
 }
 
-func prepare_known_formats(line []byte) {
-    prepare_regexps(line, &known_formats)
+func prepare_known_format(line []byte) {
+    // Split the line at the first ':', the first part beeing the name, the second beeing the regexp.
+    split := bytes.SplitAfterN(line, []byte(":"), 2)
+    if len(split) != 2 {
+        fmt.Println("Line '" + string(line) + "' doesn't have the required format 'name: regexp'")
+        return
+    }
+    name := strings.Trim(string(split[0]), ":")
+    name = strings.Trim(name, " ")
+    exp := split[1]
+    
+    // Compile the regular expression.
+    r, err := regexp.Compile(string(exp))
+    if err != nil {
+        fmt.Println("Line '" + string(line) + "' doesn't compile to a regular expression:", err.Error())
+        return
+    }
+
+    // Store name and regular expression as a known format.
+    f := NewFormat(string(name), *r)
+    known_formats = append(known_formats, *f)
 }
 
-func prepare_known_fields(line []byte) {
+func prepare_known_field(line []byte) {
     prepare_regexps(line, &known_fields)
 }
 
-// Remove comments, which are indicated by "<<<<<<", from a line.
-func uncomment(line string) string {
-    pos := strings.Index(string(line), " <<<<<<")
-    if pos == -1 {
-        return line
-    }
-    trimmed := line[0:pos]
+func usage() {
 
-    fmt.Println("input  =", line)
-    fmt.Println("output =", trimmed)
-    return trimmed
+    fmt.Println("Usage: alps [flags] filename.")
+    flag.PrintDefaults()
+    os.Exit(2)
 }
 
-// Call function for each line in a file.
-func for_each_line(filename string, function func([]byte)) {
-    f, err := os.Open(filename)
-    if err != nil {
-        panic(err)
+func dump_known_formats() {
+    fmt.Println();
+    fmt.Println("Known formats:")
+    for i := range known_formats {
+        fmt.Println("'" + known_formats[i].name + "'")
     }
-    defer f.Close()
-    r := bufio.NewReader(f)
-    for {
-        line, err := r.ReadBytes('\n')
-        if err == nil {
-            clean := strings.Trim(string(line), "\r\n")
-            clean = uncomment(clean)
-            function([]byte(clean))
-        } else if err == io.EOF {
-            break
-        } else {
-            fmt.Printf(err.Error())
-        }
+    l := strconv.Itoa(len(known_formats))
+    fmt.Println("Total " + l)
+}
+
+func dump_known_fields() {
+    fmt.Println();
+    fmt.Println("Known fields:")
+    for i := range known_fields {
+        fmt.Println("'" + known_fields[i].String() + "' defining",known_fields[i].SubexpNames())
     }
+    l := strconv.Itoa(len(known_fields))
+    fmt.Println("Total " + l)
 }
 
 func main() {
-    for_each_line("../misc/known-formats.txt", prepare_known_formats)
-    for_each_line("../misc/known-fields.txt", prepare_known_fields)
+
+    var dump bool
+    var format string
+
+    flag.Usage = usage
+    flag.BoolVar(&dump, "dump", false, "Dump config and exit.");
+    flag.StringVar(&format, "format", "", "Use a specific format.")
+    flag.Parse()
+
+    // args = flag.Args()
+
+    for_each_line("../misc/known-formats.txt", prepare_known_format)
+    for_each_line("../misc/known-fields.txt", prepare_known_field)
+
+    if dump {
+        dump_known_formats()
+        dump_known_fields()
+        os.Exit(0)
+    }
+
+    if format != "" {
+        fmt.Println("Searching for format..." + format)
+        os.Exit(1)
+    }
+
+    // todo: specify file via command line
+
     for_each_line("../misc/syslog-sample-01.txt", process_line)
 }

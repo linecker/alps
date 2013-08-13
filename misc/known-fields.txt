@@ -2,7 +2,7 @@
 (?P<pid>\[[0-9]{1,5}\]) <<<<<< Process identifier
 (?P<time>[0-9]{2}:[0-9]{2}:[0-9]{2}) <<<<<< 
 (?P<time>0x\S*) <<<<<< 
-(?P<user>root) <<<<<< 
+(?P<user>root|sudo) <<<<<< 
 (?P<path>/\S*) <<<<<< 
 (?P<entity>loginwindow) <<<<<< 
 (?P<entity>DEBUG) <<<<<< 
