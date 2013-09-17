@@ -130,7 +130,7 @@ func dump_known_fields() {
 }
 
 // Load default values.
-func load_defaults() {
+func load_config_defaults() {
 	globals.printer = print_color
 	globals.format_spec = "../data/known-formats.txt"
 	globals.fields_spec = "../data/known-fields.txt"
@@ -138,7 +138,6 @@ func load_defaults() {
 
 // Read the config files.
 func read_config_files() {
-	load_defaults()
 	for_each_line(globals.format_spec, load_known_format)
 	for_each_line(globals.fields_spec, load_known_field)
 }

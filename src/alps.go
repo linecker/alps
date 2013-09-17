@@ -38,6 +38,8 @@ func main() {
 	var format string
 	var output string
 
+    load_config_defaults()
+
 	flag.Usage = usage
 	flag.BoolVar(&dump, "dump", false, "Dump config and exit")
 	flag.StringVar(&format, "format", "", "Use specific input format")
@@ -46,7 +48,7 @@ func main() {
 	flag.StringVar(&globals.fields_spec, "fields_file", "", "Use a custom field specification file")
 	flag.Parse()
 
-	// Config files and debug
+	// Config files and debug.
 	read_config_files()
 	if dump {
 		dump_known_formats()
@@ -63,7 +65,7 @@ func main() {
 		}
 	}
 
-	// Choose format
+	// Choose format.
 	if format != "" {
 		f := search_known_formats(format)
 		if f == nil {
