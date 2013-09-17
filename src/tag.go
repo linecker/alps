@@ -55,10 +55,8 @@ func chop_add(chunks []Chunk, bytes []byte, tag string, pos1 int, pos2 int,
 	return append(chunks, c)
 }
 
-// Try to match the src Chunk for the regular expression re
-// and chop it into pieces...
-
-//
+// Try to match the src chunk for the regular expression re and chop the 
+// chunk into pieces. 
 func chop(src Chunk, re regexp.Regexp, offset int) []Chunk {
 	if src.tag != "" {
 		return []Chunk{src}
@@ -86,15 +84,15 @@ func chop(src Chunk, re regexp.Regexp, offset int) []Chunk {
 	return chunked
 }
 
-// Recursively walk to all
-func recursive_xxx(chunk Chunk) []Chunk {
+// Recursively tag given chunk.
+func tag_chunk(chunk Chunk) []Chunk {
 	var result []Chunk
 	for j := 0; j < len(globals.known_fields); j++ {
 		r := chop(chunk, globals.known_fields[j], chunk.pos1)
 		if len(r) > 1 {
 			//if ( r[0].tag != "" ) {
 			for k := range r {
-				r2 := recursive_xxx(r[k])
+				r2 := tag_chunk(r[k])
 				for l := range r2 {
 					result = append(result, r2[l])
 				}
@@ -105,12 +103,13 @@ func recursive_xxx(chunk Chunk) []Chunk {
 	return []Chunk{chunk}
 }
 
+// Tag given line.
 func tag_line(line []byte) {
 	initial_chunk := preprocess(line)
 	chunked := chop(initial_chunk[0], globals.format.exp, 0)
 	var result []Chunk
 	for i := range chunked {
-		r := recursive_xxx(chunked[i])
+		r := tag_chunk(chunked[i])
 		for k := range r {
 			result = append(result, r[k])
 		}

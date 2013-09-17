@@ -56,7 +56,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	// Choose a postprocessing function.
+	// Handle custom postprocessing function (default is color).
 	if output != "" {
 		if output == "table" {
 			globals.printer = print_table
@@ -65,7 +65,7 @@ func main() {
 		}
 	}
 
-	// Choose format.
+	// Handle custom input format (default is syslog).
 	if format != "" {
 		f := search_known_formats(format)
 		if f == nil {

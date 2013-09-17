@@ -6,6 +6,7 @@ import "regexp"
 import "strconv"
 import "strings"
 
+// Bundles all global variables.
 type globals_t struct {
     // Points to the choosen postprocessing function.
     printer Printer
@@ -25,7 +26,6 @@ type globals_t struct {
     // Holds all known fields (with compiled regexps).
 	known_fields []regexp.Regexp
 }
-
 var globals globals_t
 
 // Interface definition for a postprocessing printer: A printer is a function
