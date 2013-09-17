@@ -1,4 +1,4 @@
-// Unit tests for the whole project.
+// Unit tests.
 
 package main
 
