@@ -4,8 +4,9 @@
 <<<<<< UNIX system log (syslog) 
 syslog: (?P<date>\w\w\w\s*\w* \w\w:\w\w:\w\w) (?P<host>\S*)
 
-<<<<<< Asterisk, e.g.
+<<<<<< Asterisk, e.g. 
 <<<<<< [Mar 13 07:34:44] VERBOSE[2724] logger.c: == Manager registered action GetConfig
-asterisk: [(?P<date>\w\w\w \w* \w\w:\w\w:\w\w)] (?P<host>\S*) <<<<<< TODO: Asterisk, e.g. 
+<<<<<< asterisk: [(?P<date>\w\w\w \w* \w\w:\w\w:\w\w)] (?P<host>\S*) <<<<<< TODO: Asterisk, e.g. 
 
-<<<<<< Todo: Default glog example
+<<<<<< Todo: Default glog example, e.g. "I1208 06:29:01.819779 20662 foo.cc:523] Some message"
+glog: (?P<level>\w)(?P<date>\w\w\w\w) (?P<time>\w\w:\w\w:\w\w.\w\w\w\w\w\w) (?P<pid>\w*) (?P<file>\S*):(?P<line>\S*)] 

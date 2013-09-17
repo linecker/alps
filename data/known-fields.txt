@@ -9,7 +9,7 @@
 (?P<user>root|sudo|admin|administrator)
 (?P<path>/\S*)
 
-<<<<<< 
+<<<<<< Another family of fields.
 (?P<loglevel>trace)
 (?P<loglevel>warning) 
 (?P<loglevel>debug)

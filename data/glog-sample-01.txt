@@ -1,0 +1,4 @@
+I1208 06:29:01.819779 20662 foo.cc:523] I couldn't find any example
+I1208 06:29:02.123456 20662 foo.cc:525] that showed google log (glog)
+I1208 06:29:12.654321 20662 foo.cc:120] in action. If you do, pleace replace
+I1208 06:31:01.123456 20662 foo.cc:545] this...

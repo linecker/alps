@@ -37,6 +37,8 @@ func main() {
 	var dump bool
 	var format string
 	var output string
+    var format_spec string
+    var fields_spec string
 
     load_config_defaults()
 
@@ -44,9 +46,16 @@ func main() {
 	flag.BoolVar(&dump, "dump", false, "Dump config and exit")
 	flag.StringVar(&format, "format", "", "Use specific input format")
 	flag.StringVar(&output, "output", "", "Use specific output format (color|table|json)")
-	flag.StringVar(&globals.format_spec, "format_file", "", "Use a custom format specification file")
-	flag.StringVar(&globals.fields_spec, "fields_file", "", "Use a custom field specification file")
+	flag.StringVar(&format_spec, "format_file", "", "Use a custom format specification file")
+	flag.StringVar(&fields_spec, "fields_file", "", "Use a custom field specification file")
 	flag.Parse()
+
+    if format_spec != "" {
+        globals.format_spec = format_spec
+    }
+    if fields_spec != "" {
+        globals.fields_spec = fields_spec
+    }
 
 	// Config files and debug.
 	read_config_files()
