@@ -1,12 +1,17 @@
 <<<<<< This file specifies known formats, e.g. UNIX syslog. Comments in this
 <<<<<< file are denoted by six less-than signs, followed by the comment.
 
-<<<<<< UNIX system log (syslog) 
+<<<<<< syslog (on Mac OS X 10.6) 
 syslog: (?P<date>\w\w\w\s*\w* \w\w:\w\w:\w\w) (?P<host>\S*)
 
-<<<<<< Asterisk, e.g. 
-<<<<<< [Mar 13 07:34:44] VERBOSE[2724] logger.c: == Manager registered action GetConfig
-<<<<<< asterisk: [(?P<date>\w\w\w \w* \w\w:\w\w:\w\w)] (?P<host>\S*) <<<<<< TODO: Asterisk, e.g. 
+<<<<<< syslog (on openSUSE 12.3)
+<<<<<< e.g. "2013-04-16T20:44:29.058060+02:00 linux-93d5 kernel: [ 3192.388771] serial 00:0a: activated"
+syslogsuse: (?P<date>\S*) (?P<host>\S*) (?P<service>\S*):
 
-<<<<<< Todo: Default glog example, e.g. "I1208 06:29:01.819779 20662 foo.cc:523] Some message"
+<<<<<< Asterisk, e.g. 
+<<<<<< e.g. "[Mar 13 07:34:44] VERBOSE[2724] logger.c: == Manager registered action GetConfig"
+<<<<<< TODO asterisk: [(?P<date>\w\w\w \w* \w\w:\w\w:\w\w)] (?P<host>\S*)
+
+<<<<<< Google Log
+<<<<<< e.g. "I1208 06:29:01.819779 20662 foo.cc:523] Some message"
 glog: (?P<level>\w)(?P<date>\w\w\w\w) (?P<time>\w\w:\w\w:\w\w.\w\w\w\w\w\w) (?P<pid>\w*) (?P<file>\S*):(?P<line>\S*)] 
