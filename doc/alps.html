@@ -1,7 +1,229 @@
-<html>
-<title>Advanced Logfile Processing System</title>
-<body>
-<h1>Todo</h1>
-... Todo ...
+<head>
+    <style>pre{white-space: pre-wrap;}</style>
+    <title>Logfile Processing</title>
+</head>
+<body contenteditable="false">
+    <h1>Advanced Log File Processing</h1>
+    <div><i>This page documents my ongoing efforts for an "Informatikpraktikum 2" about the topic of Advanced Log File Processing.&nbsp;</i><i>The page might be changed frequently until this note is removed. I rely heavily on "Log File Processing by Machine Learning and Information Extraction" by Peter Robinson.&nbsp;</i><i>In fact, my efforts only target a very specific part of the overall problem and the "Advanced" in the title is borrowed from the working title of the overall project.</i></div>
+    <h2>Introduction</h2>
+    <div>A log file is a computer file containing a series of events which usually describe the state or activities of a given set of processes. For processes that do not directly interact with the user (think of daemons or the kernel), the log file might be the primary interface. Processes with graphical user interfaces might still use log files for saving important technical information like warnings or errors. Furthermore, a log file might contain events from multiple processes (e.g. /var/log/message on Unix) or from a single process (e.g. /var/log/httpd/access_log).</div>
+    <div><br></div>
+    <div>Log files have always been important in the day-to-day operations of computers and in software development, two mayor current trends that rely heavily on log files are host-based intrusion detection systems (HIDS) and (buzzword alert!) big data analytics.</div>
+    <div>
+        <h2>Important logfiles and logging facilities</h2>
+        <h3>Web Server Logs</h3>
+        <div>One prominent source of log files are web servers, which commonly use the <i>Common Log Format</i> for their access logs resulting in log entries like the following.</div>
+    </div>
+    <div>
+        <pre>127.0.0.1 - frank [10/Oct/2012:13:55:36 -0700] "GET /apache.gif HTTP/1.0" 200 2326</pre>
+    </div>
+    <div>
+        <div>Another slightly different format is the&nbsp;<i>Combined Log Format</i>.</div>
+        <pre>127.0.0.1 - frank [10/Oct/2012:13:55:36 -0700] "GET /apache.gif HTTP/1.0" 200 2326 "http://www.example.com/start.html" "Mozilla/4.08 [en] (Win98; I ;Nav)"</pre>
+        <div>More information on logging with httpd can be found at <a href="http://httpd.apache.org/docs/current/logs.html">http://httpd.apache.org/docs/current/logs.html</a>&nbsp;(another interesting, more general, read is <a href="http://logging.apache.org/">http://logging.apache.org/</a>).</div>
+        <h3>Syslog</h3>
+        <p>Syslog (short for system log) is the standard logging facility for Unix-like systems. The key part of syslog is the syslog deamon which listens on the Unix domain socket /dev/log (and often UDP port 514 as well for the aggregation of log data from other machines) for messages in syslog format (as specified in RFC 5424). The syslog daemon then forwards those messages to files (e.g. /var/log/messages), email, the console, etc. Processes that want to write to the system log can use the C library function syslog(3), which usually does a send(2) to mentioned /dev/log. The kernel itself (in case of Linux) uses printk and klogd to achieve similar functionality (whereby klogd itself writes to /dev/log).</p>
+        <p>Entries in the syslog file typically have the following format.</p>
+        <pre>Mar 12 22:00:31 machine configd[13]: network configuration changed.
+Mar 12 22:00:36 machine ntpd[18]: time reset +0.159315 s<br>Mar 12 22:00:57 machine loginwindow[32]: no spins reported for this wake</pre>
+    </div>
+    <h3>Google glog and log4j</h3>
+    <div>Two very important, free and open source libraries for application logging are <a href="https://code.google.com/p/google-glog/">glog</a> from Google and <a href="http://logging.apache.org/log4j/">log4j</a> from the Apache Foundation. By default, Google glog uses a rather dense output format and produces output like the following.</div>
+    <pre>I1208 06:29:01.819779 20662 foo.cc:523] Some message</pre>
+    <div>The I indicates the first character of the log level (INFO), followed by the date (1208), the time (06:29:01.819779), the pid (20662), the source file name and line and the custom log message. Metadata and log message are clearly separated via "]". The following <a href="https://code.google.com/p/google-glog/source/browse/trunk/src/logging.cc?r=125">listing from the Google glog source code</a> shows the code that formats those messages.</div>
+    <div>
+        <pre>stream &lt;&lt; LogSeverityNames[severity][0]<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; setw(2) &lt;&lt; 1+tm_time-&gt;tm_mon<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; setw(2) &lt;&lt; tm_time-&gt;tm_mday<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; ' '<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; setw(2) &lt;&lt; tm_time-&gt;tm_hour &lt;&lt; ':'<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; setw(2) &lt;&lt; tm_time-&gt;tm_min &lt;&lt; ':'<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; setw(2) &lt;&lt; tm_time-&gt;tm_sec &lt;&lt; '.'<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; setw(6) &lt;&lt; usecs<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; ' '<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; setfill(' ') &lt;&lt; setw(5) &lt;&lt; GetTID() &lt;&lt; setfill('0')<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; ' '<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&lt;&lt; file &lt;&lt; ':' &lt;&lt; line &lt;&lt; "] ";</pre>
+    </div>
+    <div>Log4j provides so called <i>Appenders</i>, <i>Layouts</i> and <i>ConversionPatterns</i> that allow for great flexibility in the format of log files. A conversion pattern like e.g.</div>
+    <pre>log4j.appender.stdout.layout.ConversionPattern=%-5p %d [%t] %c: %m%n</pre>
+    <div>will result &nbsp;in log message like e.g.</div>
+    <pre>INFO &nbsp;2013-02-09 11:52:20,598 [ListenerThread_start] com.test.Server: Server initializing...</pre>
+    <h3>Considerations and common properties</h3>
+    <div>A simple google search for "filetype:log" brings up a large amount of publicly available log files. To get a feeling of the different formats of those log files I collected 30 of those and extracted one line each, resulting in the following listing (the numbers 01-30 and the ": " at the start of each line were added by me and were not part of the original log messages).</div>
+    <div>
+        <pre>01: DEBUG &nbsp; |100902 14:40:09|----- Finished operation 19 ------<br>02: [Thu Mar 14 17:32:36 2013] [error] [client 88.80.10.1] File does not exist: /media/www/na-net.cz/pp<br>03: 2012-12-11T16:22:36 &nbsp;*** obino &lt;obino!~graziano@ip98-171-190-102.sb.sd.cox.net&gt; has quit IRC (Ping timeout: 259 seconds)<br>04: 14:53:00|Verbose| Method exit: Microsoft.Crm.Setup.Server.ServerSetup.Initialize<br>05: iwl4965: Unknown symbol ieee80211_register_hw<br>06: 2004.03.30 02:30 A C:\jon\The BazOOkas\feel.htm --&gt; www.thebazookas.com /htdocs feel.htm<br>07: &lt;12/23/12@15:44:43&gt; [dest: 205.188.94.204] starting stream (UID: 3)[L: 1]{A: SHOUTcast Directory Tester}(P: 0)<br>08: Wed, 2011-07-13 07:42:46 +0000 &nbsp;fetch_file(http://www.uniquearticlewizard.com/plugins/wordpress/version.txt)<br>09: 2007-01-05744447    145535<br>10: 2012-05-09 04:36:21 Warning: Warning (2): strlen() expects parameter 1 to be string, array given in [/home/dev/public_html/Coordino/cake/libs/i18n.php, line 184]<br>11: [10/22/09 15:27:58:830 CDT] 00000220 SystemOut &nbsp; &nbsp; O d:/!General_dz/members/in/ASN/07002/archive/ processASN<br>12: Could not find/open font when opening font "arial", using internal non-scalable font<br>13: ::1 - - [15/Mar/2013:16:14:21 +0000] "OPTIONS * HTTP/1.0" 200 152 "-" "Apache/2.2.16 (Debian) (internal dummy connection)"<br>14: I. 2012-04-23 10:49:55. &lt;2344.3588.F0B0Up&gt; Using RSOE protocol version 5<br>15: 2012-03-08 21:03:23,944 INFO spawned: 'tornado-8081' with pid 24465<br>16: runURL-&gt; The remote server returned an error: (404) Not Found.;10/4/2011,11:17 AM<br>17: Jan &nbsp;8 09:09:01 store CRON[7219]: (root) CMD ( &nbsp;[ -x /usr/lib/php5/maxlifetime ] &amp;&amp; [ -d /var/lib/php5 ]<br>18: 07/16/10 12:19:32 -processSIGTERM_DA: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;devfs /dev<br>19: [2012-12-17 13:58:58] EDIT autoComplete/models/menu.py: -41<br>20: thekraken: 2606: stopped with signal 0x00000013<br>21: 06-Dec-2012 17:37:12.490 FINE [WrapperSimpleAppMain] com.gemstone.gemfire.modules.session.bootstrap.AbstractCache.lifecycleEvent Received BEFORE_START event<br>22: 17:06:43 T:1291392 &nbsp;NOTICE: Default DVD Player: dvdplayer<br>23: Mon Nov 19 09:23:54 CET 2012 &nbsp; [info] Loaded System Directive: org.apache.velocity.runtime.directive.Macro<br>24: [88F8:85E8][2012-12-13T13:27:25]: MUX: &nbsp;Existing last unconfirmed source: Web<br>25: [Sat Sep 08 03:44:57 2012] [error] [client 71.202.240.136] client denied by server configuration: proxy:http://localhost:8080/<br>26: 2012-11-19 16:24:51,001 DEBUG [ds@delti.com] QuartzWorker-1 ServiceRunner &nbsp; &nbsp;Datenschutz * 1 FETCH (FLAGS (\Seen))<br>27: 11/13/2012    3:35:49 AM  The virus definitions have been automatically updated to version 121113-0.<br>28: 2012-08-01T11:56:39-07:00 0:00.000 0.040u 6.6.9 Policy Magick[16287]: policy.c/IsRightsAuthorized/485/Policy Domain: Coder; rights=Read; pattern="PNG" ...<br>29: 15.11 11:24:21,988| Resolve coordinator from name chef.<br>30: 11/05/2002 11:47:43: Extraktion aus X:\GROUP\GR_1ZKD\Z\ZVR\CD-ROM\ZVR_1002\pdfs\current\ZVR_B14.pdf.</pre>
+    </div>
+    <div><br></div>
+    <div>Log files do have a specific reason of existence and share some common properties.</div>
+    <div>
+        <ul>
+            <li>Log files are often designed to be useful with standard Unix tools like grep, sed, awk, sort, uniq, tail, gnuplot, etc. (see <a href="http://oreilly.com/openbook/utp/UnixTextProcessing.pdf">Unix Text Processing</a>&nbsp;and <a href="http://www.the-art-of-web.com/system/logs/#.UVNiqqu1c5x">Analyzing Apache Log File</a>).</li>
+            <li>Individual log entries often contain a well defined header and an application level message.</li>
+            <li>Individual log entries often contain time and date.</li>
+            <li>Log entries often contain a severity level (debug, info, warn, error, fatal, etc.).</li>
+            <li>Log entries might contain well defined technical attributes like IP addresses, directories or file names, host names, domain names, process identifiers, etc. (the process of tagging those resources is sometimes called "named entity recognition")</li>
+            <li>Log entries might contain measures (x bytes, x seconds, x ticks, x meters, etc.)</li>
+            <li>Log entries might contain key-value pairs (newTemp=10)</li>
+            <li>Log entries might include delimiters ([],(),"",'', etc.)</li>
+        </ul>
+    </div>
+    <h2>Related projects</h2>
+    <p></p>
+    <p></p>
+    <p>Open source host-based intrusion detection systems do exactly what we look for, namely advanced log file processing. I therefore had a look at the following systems.</p>
+    <p></p>
+    <ul>
+        <li><a href="http://www.snort.org/">http://www.snort.org/</a>: Not relevant since it is a NIDS (network intrusion detection system). We're only interested in HIDS (host-based intrusion detection system). HIDS work by examining log files, file system state and other local properties, NIDS work by snooping network traffic.</li>
+        <li><a href="http://www.openinfosecfoundation.org/index.php/download-suricata">http://www.openinfosecfoundation.org/index.php/download-suricata</a>: NIDS.</li>
+        <li><a href="http://sourceforge.net/projects/tripwire/">http://sourceforge.net/projects/tripwire/</a>: Open source part does file system integrity checking but no log file analysis.</li>
+        <li>
+            <a href="http://www.ossec.net/">http://www.ossec.net/</a>
+            <ul>
+                <li>Highly relevant since it utilizes log files heavily with formats including Unix syslog, diverse FTP servers, Apache, diverse vendor logs, snort logs, etc.</li>
+                <li>Principles are described in the presentation at&nbsp;<a href="http://ossec.net/ossec-docs/auscert-2007-dcid.pdf">http://ossec.net/ossec-docs/auscert-2007-dcid.pdf</a>, more Details can be found in the book "OSSEC Host-Based Intrusion Detection Guide",&nbsp;Chapter 4 "Working with Rules".</li>
+                <ul>
+                    <li>Step 1: Pre-decoding: Extract well known fields (for syslog format, this is time, date, hostname, ...). Results in an internal representation that is similar for all types of input.</li>
+                    <li>Step 2: Decoding: Extracts non-static information that can be used in rules. Decoders are specified in&nbsp;<a href="https://github.com/packetstash/ossec/blob/master/etc/decoder.xml.">etc/decoder.xml</a>&nbsp;by using regular expressions and the information available from the former step.</li>
+                    <li>Step 3: Analysis: Check if the decoded event matches any rule from&nbsp;<a href="https://github.com/packetstash/ossec/tree/master/etc/rules">etc/rules/</a>.</li>
+                </ul>
+            </ul>
+        </li>
+        <li><a href="http://jffp.sourceforge.net/">http://jffp.sourceforge.net/</a>:</li>
+        <ul>
+            <li>The Java Flat File Processing Library uses positional patterns and text images (e.g. ##### XX @@@@@@@@@@) for specifying a format.</li>
+            <li>Only suitable for flat files that do not have fields with varying length.</li>
+        </ul>
+        <li><a href="http://awstats.cvs.sourceforge.net/viewvc/awstats/awstats/">awstats</a> (and other web log analyzers) typically provide no general purpose functionality and are limited to the <i>Common Log Format</i>.</li>
+    </ul>
+    <h2>Implementation Proposal</h2>
+    <div>
+        <div>
+            <div>The goal of my effort is to develop a robust C11 implementation that "understands" many of the common microevents found in popular log file formats per se and is expandable towards custom log file formats. The program should be able to read from standard input like e.g.&nbsp;</div>
+            <pre>tail -f /var/log/messages | tag</pre>
+        </div>
+        <div>Similar to Robinson, I would like to split the processing into several stages:</div>
+        <pre>+--------------------------+
+|      preprocessing       | =&gt; convert input lines to intermediate format (maybe s-expressions, json?)<br>+--------------------------+
+|   known format decoding  | =&gt; (optional) tags known fields for well defined formats, e.g. syslog, common log format
++--------------------------+
+|          blocks          | =&gt; (optional) detects blocks of information, e.g. "[delimited by square brackets]"
++--------------------------+
+|  named entity detection  | =&gt; tags entities from a simple wordlist (hostnames, user names, severities, etc.)
++--------------------------+
+|      field detection     | =&gt; tags individual fields based on regular expressions (ipv4addr, ipv6addr, date, time, etc.) 
++--------------------------+
+|      post-processing     | =&gt; (optional) converts the intermediate format to some desired format (json, xml, etc.)
++--------------------------+</pre>
+        <div>An invocation of the command should transfer an input line like</div>
+        <pre>sshd[14299]: Accepted publickey for someone from 192.168.0.1 port 32774 ssh2</pre>
+        into something like (in case of json post-processing)
+        <pre>{
+  "service": {
+    "name": "sshd",
+    "pid": "14299"
+  },
+  "word": "Accepted",
+  "word": "publickey",
+  "word": "from",
+  "word": "someone",
+  "word": "from", 
+  "ipv4": {
+    "address": "192.168.0.1",
+    "port": "32774"
+  },
+  "word": "ssh2"
+}</pre>
+        I would use some standard C libraries, namely GLib, libxml2, json-c, etc. but no special purpose log processing library (since nothing seems to fit).
+        <h2>Actual Implementation</h2>
+        During the course of implementing the above proposal, several decisions were made that differ from the original plan, namely:
+        <ul>
+            <li><a href="http://www.golang.org/">Go</a> is used instead of C11 (specially because it brought all necessary functionality along in its standard library).</li>
+            <li>A much simpler architecture with far less stages is used (<i>preprocessing, tagging, post-processing</i>), since:</li>
+            <ul>
+                <li><i>known format decoding</i>, <i>named entity detection</i> and <i>field detection</i> emerged to use the same algorithm (and therefore all merged in the stage <i>tagging</i>)</li>
+                <li><i>block detection</i> emerged to be mostly irrelevant since it provides little extra information and the block start and end signs are typically part of some predefined format anyway</li>
+            </ul>
+            <li>
+                The key internal data structure is not a full Abstract Syntax Tree (as implied by the tree-like json example in the implementation proposal) but a much simpler, flat list of text chunks (simply called <i>chunk</i> in the source code). This implies that we only have chunks of the original line that are either tagged or not tagged but we do not have chunks that have any sub-structure of tags. This was both a decision towards performance and simplicity and can be explained in the following way:
+                <ul>
+                    <li>The input of alps always is a line of text.</li>
+                    <li>Out goal is to tag this line of text.</li>
+                    <li>Our output will be a sorted list of text chunks, some of them will be tagged, some of them won't.</li>
+                    <li>The "natural way" of defining a log file format is to split it into two parts:</li>
+                    <ul>
+                        <li>A well-defined header (or trailer) which contains fields like date, time, pid, etc.</li>
+                        <li>Some payload.</li>
+                    </ul>
+                    <li>This will not require a tree-like structure since the information itself is "flat".</li>
+                    <li>If there is any need for a tree-like structure, it can be emulated using a set of definitions for each way through the tree.</li>
+                </ul>
+    </div>
+    <h3>Code structure, program flow and core data structures</h3>
+    <div>The code of alps is split amongst several source files:</div>
+    <div>
+    <ul>
+    <li>The file "alps.go" contains the main entry point for the console application and some utility functions for handling the command line arguments.</li>
+    <li>The file "config.co" contains all things necessary for parsing the config files and the in-memory representation of all the input settings.
+    </li>
+    <li>The file "post.go" contains different post-processing functions for printing the tagged lines to standard output.</li>
+    <li>The file "pre.go" contains different pre-processing functions.</li>
+    <li>The file "tag.go" contains the core of alps, all functionality necessary to tag an input line.</li>
+    <li>The file "unit_test.go" contains some unit tests.</li>
+    </ul>
+    </div>
+    <div>The <i>alps</i> program depends heavily on two configuration files. The first file specifies the <i>known formats</i> like syslog or google-log. Those specifications are built upon regular expressions and specially the regular expression capturing group construct<i> (?P&lt;tag&gt;re)</i>. Such an expressions will assign some chunk of text that matches the regular expression <i>re</i> the name <i>tag</i>. For example, the specification of the syslog format looks like the following.</div>
+    <pre>(?&lt;date&gt;\w\w\w\s*\w* \w\w:\w\w:\w\w) (?P&lt;host&gt;\S*)</pre>
+    <p>The second specification file specifies the <i>known fields</i> which are fields with a known (well-definied) format that can occur anywhere in the log payload. They use the same regular expression syntax as above, the specification for an IPv4 address, for example, looks like the following.</p>
+    <pre>(?P&lt;ipv4&gt;[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})</pre>
+    <div>The program flow of <i>alps </i>always looks the same. During startup, the known formats file (usually located at data/known-formats.txt but configurable using the --format_file command line option) is compiled into regular expressions. The same is done with the known fields file (usually located at data/known-fields.txt but configurable using the --fields_file command line option). Then, for each line of input <i>alps </i>does the following:</div>
+    <div>
+    <ul>
+    <li>Convert the line into a <i>chunk</i> (preprocessing).</li>
+    <li>Try to tag the line using the selected (via a command line option or per default) format (tagging).</li>
+    <li>Recursively try to tag the line using all available field definitions (tagging again).</li>
+    <li>Print the line to standard output using the selected (via a command line option or per default) printer (post-processing).</li>
+    </ul>
+    </div>
+    <div>All those actions rely heavily on the core data structure of <i>alps</i>, the mentioned <i>chunk</i>. The chunk (or a list of chunks) is used at the interfaces between the three stages (preprocessing, tagging, post-processing). The chunk has a straight-forward definition:</div>
+    <div>
+    <pre>type Chunk struct {
+    pos1 int
+    pos2 int
+    payload []byte
+    tag string
+    }</pre>
+    </pre>
+    <div>
+    During preprocessing, a line of text is converted into a single, large chunk. During tagging, this chunk is split into several chunks (depending whether which parts of the original chunks could be tagged or not) recursively. The pos1 and pos2 fields within the chunk specify its position within the original line. During post-processing, the list of chunks is serialized in the chosen output format. 
+    </ul>
+    <h3>Compilation</h3>
+    <div>
+    The current source code can be found at <a href="https://github.com/stefanlinecker/alps">https://github.com/stefanlinecker/alps</a>. Assuming you have Go <a href="http://golang.org/doc/install">installed</a> on your system, building alps is straight-forward. Switch to the src directory of the repository and type:
+    </div>
+    <pre>go build -o alps</pre>
+    <div>This will spit out the alps (or alps.exe in case of Windows) binary.</div>
+    <h3>Usage</h3>
+    <div>
+    The alps command can be used in <i>interactive</i> and <i>non-interactive</i> mode. In <i>interactive</i> mode, alps reads from standard input and is typically used like e.g. 
+    <pre>tail -f /var/log/messages | ./alps</pre>
+    </div>
+    <div> In <i>non-interactive</i> mode, alps reads from a given filename. The general usage of the alps command is:</div>
+    <pre>./alps [flags] filename</pre>
+    <div>Optional flags have the following meaning.</div>
+    <div>
+    <ul>
+    <li>The flag "--dump" causes alps to dump the config and exit.</li>
+    <li>The flag "--format" can be used to specify the input format explicitly (per default, the first definition from the known fields file is used; in the repository, this is syslog).</li>
+    <li>The flag "--output" can be used to choose an output format (choices include color, json and table, whereby color is the default)</li>
+    <li>The flag "--format_file" can be used to specify a custom location for the definition of the known formats.</li>
+    <li>The flag "--fields_file" can be used to specify a custom location for the definition of the known fields.</li>
+    </ul>
+    <div>The repository contains some sample data in syslog format and the following command can be used to check if everything is working on your platform.</div>
+    </div>
+    <pre>./alps ../data/syslog-sample-01.txt</pre>
+    </div>
+    </div>
+    <h2>References</h2>
+    <p></p>
+    <ul>
+        <li>Peter Robinson, "Log File Processing by Machine Learning and Information Extraction". 2006.</li>
+        <li>Bray, Rory, Daniel Cid, and Andrew Hay. "OSSEC host-based intrusion detection guide". Syngress, 2008.</li>
+        <li>Timofte, Jack. "Intrusion detection using open source tools." Informatica Economica Journal Issn 14531305 (2008): 75-79.</li>
+        <li>
+            <a href="http://www.gnu.org/software/libc/manual/html_node/Overview-of-Syslog.html#
+                Overview-of-Syslog">The GNU C Library:Overview of Syslog</a>
+        </li>
+        <li>The <a href="http://golang.org/pkg/">Package Documentation</a> of the Go Programming Language.</li>
+    </ul>
+    <p></p>
 </body>
-</html>
