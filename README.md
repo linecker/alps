@@ -1,9 +1,1 @@
-alps
-====
-
-Advanced Logfile Processing System
-
-run via:
-
-    cd src
-    go run alps
+See http://htmlpreview.github.io/?https://github.com/stefanlinecker/alps/blob/master/doc/alps.html
