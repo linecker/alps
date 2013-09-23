@@ -181,7 +181,7 @@ Mar 12 22:00:36 machine ntpd[18]: time reset +0.159315 s<br>Mar 12 22:00:57 mach
     pos2 int
     payload []byte
     tag string
-    }</pre>
+}</pre>
     </pre>
     <div>
     During preprocessing, a line of text is converted into a single, large chunk. During tagging, this chunk is split into several chunks (depending whether which parts of the original chunks could be tagged or not) recursively. The pos1 and pos2 fields within the chunk specify its position within the original line. During post-processing, the list of chunks is serialized in the chosen output format. 
