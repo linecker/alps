@@ -52,6 +52,13 @@ func chop_add(chunks []Chunk, bytes []byte, tag string, pos1 int, pos2 int,
 	c.pos2 = offset + pos2
 	c.payload = bytes
 	c.tag = tag
+
+	// Try if we have to apply a plugin
+	new_payload := try_apply_plugin(tag, bytes) 
+	if new_payload != nil {
+		c.payload = new_payload
+	}
+
 	return append(chunks, c)
 }
 
