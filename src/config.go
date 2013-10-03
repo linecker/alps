@@ -5,6 +5,7 @@ import "fmt"
 import "regexp"
 import "strconv"
 import "strings"
+import "runtime"
 
 // Bundles all global variables.
 type globals_t struct {
@@ -25,6 +26,9 @@ type globals_t struct {
 
     // Holds all known fields (with compiled regexps).
 	known_fields []regexp.Regexp
+
+	// Path to the tmp directory (depends on OS) 
+	tmp_directory string
 }
 var globals globals_t
 
@@ -90,6 +94,14 @@ func load_known_field(line []byte) {
 		return
 	}
 	globals.known_fields = append(globals.known_fields, *r)
+
+	// Search for plugins that we can precompile.
+	names := r.SubexpNames()
+	for j := range names {
+		if j != 0 {
+			try_compile_plugin(names[j])
+		}
+	}
 }
 
 // Searches the known formats for a format name.
@@ -131,6 +143,13 @@ func dump_known_fields() {
 
 // Load default values.
 func load_config_defaults() {
+
+	if runtime.GOOS == "windows" {
+		globals.tmp_directory = "./tmp/alps"
+	} else {
+		globals.tmp_directory = "/tmp/alps"
+	}
+
 	globals.printer = print_color
 	globals.format_spec = "../data/known-formats.txt"
 	globals.fields_spec = "../data/known-fields.txt"
