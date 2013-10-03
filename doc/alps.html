@@ -213,6 +213,36 @@ Mar 12 22:00:36 machine ntpd[18]: time reset +0.159315 s<br>Mar 12 22:00:57 mach
     <pre>./alps ../data/syslog-sample-01.txt</pre>
     </div>
     </div>
+    <h3>Plugins</h3>
+    It might be desirable to do some further processing during tagging and that's where <i>alps plugins</i> come into play.
+    Those plugins are <a href="http://golang.org/">Go</a> programs itself and reside within the plugins directory of the repository.
+    For each tag name from the known fields file (e.g. <i>ipv4</i>), <i>alps</i> looks for an equally named go file (e.g. <i>ipv4.go</i>)
+    and compiles it. This happens once during startup. Then, every time a chunk of text is tagged with named tag (e.g. <i>ipv4</i>),
+    the appropriate plugin binary is executed with the payload data (e.g. 8.8.8.8) as argument. Each plugin has to follow a fixed scheme: 
+    First, read the command line argument. Second, try to transform it in the desired way. On success, print the transformed data,
+    otherwise fallback to the original input data. The following listing shows the code for the <i>ipv4</i> plugin.
+
+<pre>
+package main
+
+import "fmt"
+import "net"
+import "os"
+
+func main() {
+    input := os.Args[1]
+    output := input // fallback
+    name, err := net.LookupAddr(input)
+    if err == nil {
+        pretty := string(name[0])
+        pretty = pretty[0:len(pretty)-1]
+        output = pretty
+    }
+    fmt.Print(output)
+}
+</pre>
+
+
     <h2>References</h2>
     <p></p>
     <ul>
