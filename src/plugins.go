@@ -4,6 +4,7 @@ package main
 import "os"
 import "os/exec"
 
+// Try to compile a plugin.
 func try_compile_plugin(tag string) {
     filename := "../plugins/" + tag + ".go"
     if file_exists(filename) {
@@ -11,6 +12,7 @@ func try_compile_plugin(tag string) {
     }
 }
 
+// Compile a plugin to the tmp directory.
 func compile_plugin(filename string, tag string) {
     out := globals.tmp_directory + "/" + tag
     cmd := "go"
@@ -26,7 +28,7 @@ func compile_plugin(filename string, tag string) {
     }
 }
 
-// TODO: doc
+// Try to execute a plugin on named tag.
 func try_apply_plugin(tag string, payload []byte) []byte {
     if tag == "" {
         return nil
@@ -48,7 +50,7 @@ func file_exists(filename string) bool {
     return true
 }
 
-// TODO: doc
+// Execute a compiled plugin.
 func execute_plugin(filename string, input []byte) []byte {
     cmd := filename
     arg := string(input)

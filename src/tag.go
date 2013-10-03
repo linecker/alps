@@ -41,7 +41,6 @@ func for_each_line(filename string, function func([]byte)) {
 	}
 }
 
-// TODO: Description
 func chop_add(chunks []Chunk, bytes []byte, tag string, pos1 int, pos2 int,
 	offset int) []Chunk {
 	if len(bytes) == 0 {
@@ -53,7 +52,7 @@ func chop_add(chunks []Chunk, bytes []byte, tag string, pos1 int, pos2 int,
 	c.payload = bytes
 	c.tag = tag
 
-	// Try if we have to apply a plugin
+	// Try if we have to apply a plugin.
 	new_payload := try_apply_plugin(tag, bytes) 
 	if new_payload != nil {
 		c.payload = new_payload
