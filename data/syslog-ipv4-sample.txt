@@ -1,6 +1,6 @@
 Dec 14 17:46:06 localhost mach_kernel: 8.8.8.8 
 Dec 14 17:46:06 localhost mach_kernel: dummy message using the ip 213.153.32.101 
-Dec 14 17:46:06 localhost dummy_message: containing the ip address 173.194.45.53 209.85.231.104
+Dec 14 17:46:06 localhost dummy_message: containing the ip address 173.194.45.53 8.8.8.8 209.85.231.104
 Dec 14 17:46:06 localhost dummy_message: containing the ip address 207.46.170.123
 Dec 14 17:46:06 localhost dummy_message: containing the ip address 72.30.2.43
 Dec 14 17:46:06 localhost dummy_message: containing the ip address 66.220.149.25

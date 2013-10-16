@@ -5,7 +5,7 @@ import "fmt"
 import "regexp"
 import "strconv"
 import "strings"
-import "runtime"
+import "os"
 
 // Bundles all global variables.
 type globals_t struct {
@@ -143,13 +143,14 @@ func dump_known_fields() {
 
 // Load default values.
 func load_config_defaults() {
-
-	if runtime.GOOS == "windows" {
-		globals.tmp_directory = "./tmp/alps"
-	} else {
-		globals.tmp_directory = "/tmp/alps"
+	
+	globals.tmp_directory = "./compiled_plugins"
+	if file_exists(globals.tmp_directory) == false {
+		err := os.Mkdir(globals.tmp_directory, 0777)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
 	}
-
 	globals.printer = print_color
 	globals.format_spec = "../data/known-formats.txt"
 	globals.fields_spec = "../data/known-fields.txt"
